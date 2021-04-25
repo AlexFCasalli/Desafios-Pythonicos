@@ -13,8 +13,18 @@ Assuma que a e b tem tamanho 2 ou maior.
 """
 
 def mix_up(a, b):
-    # +++ SUA SOLUÇÃO +++
-    return
+    #Alternativa 1
+    ''''
+    p_letra_a, s_letra_a = a[0], a[1]
+    p_letra_b, s_letra_b = b[0], b[1]
+    a = p_letra_b + s_letra_b + a[2:]
+    b = p_letra_a + s_letra_a + b[2:]
+    return a + ' ' + b
+    '''
+
+    #Alternativa 2
+
+    return ' '.join([''.join([b[:2],a[2:]]),''.join([a[:2],b[2:]])])
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
