@@ -24,7 +24,7 @@ def mix_up(a, b):
 
     #Alternativa 2
 
-    return ' '.join([''.join([b[:2],a[2:]]),''.join([a[:2],b[2:]])])
+    return ' '.join([''.join([b[:2],a[2:]]),''.join([a[:2],b[2:]])]) if len(a)>2 and len(b)>2 else 'Strig com menos de dois caracteres'
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
@@ -52,3 +52,6 @@ if __name__ == '__main__':
     test(mix_up, ('dog', 'dinner'), 'dig donner')
     test(mix_up, ('gnash', 'sport'), 'spash gnort')
     test(mix_up, ('pezzy', 'firm'), 'fizzy perm')
+    test(mix_up,('ac', 'bc'), 'Strig com menos de dois caracteres')
+    test(mix_up, ('acs', 'bc'), 'Strig com menos de dois caracteres')
+    test(mix_up, ('ac', 'bcs'), 'Strig com menos de dois caracteres')
