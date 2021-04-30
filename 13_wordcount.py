@@ -52,10 +52,80 @@ e conferindo cada etapa do seu progresso.
 """
 
 import sys
+from operator import itemgetter, attrgetter
 
 
 # +++ SUA SOLUÇÃO +++
 # Defina as funções print_words(filename) e print_top(filename).
+def ler(nome):
+    filename = open(nome,"r")
+    texto = filename.read()
+    filename.close()
+    texto = texto.lower()
+    texto = texto.split()
+    return texto
+
+def contar(filename):
+    arquivo = ler(filename)
+    palavra, quantidades = [], []
+    for p in arquivo:
+        if p not in palavra:
+            palavra.append(p)
+    for l in palavra:
+        quantidades.append(arquivo.count(l))
+    words = list(zip(palavra, quantidades))
+    return words
+
+def print_words(filename):
+    words = contar(filename)
+    for p in words:
+        palavra, quantidade = p
+        print(palavra, quantidade)
+
+def print_top(filename):
+    words = contar(filename)
+    words = sorted(words,key=itemgetter(1),reverse= True)
+    cont = 0
+    for p in words:
+        cont +=1
+        if cont < 20:
+            palavra, quantidade = p
+            print(palavra,quantidade)
+
+'''
+# SOLUÇÃO FINAL (HENRIQUE B.) ###
+
+def report(words):
+    return '\n'.join([f'{w} {qty}' for w, qty in words])
+
+
+def asc(counter):
+    return sorted(counter.items())
+
+
+def top(counter, qty=20):
+    return sorted(counter.items(), reverse=True, key=lambda t: t[-1])[:qty]
+
+
+def read(filename):
+    with open(filename) as f:
+        return f.read()
+
+
+def count(content):
+    words = content.lower().split()
+    return Counter(words)
+
+
+def count_words(filename):
+    return report(asc(count(read(filename))))
+
+
+def top_words(filename):
+    return report(top(count(read(filename))))
+
+'''
+
 
 
 # A função abaixo chama print_words() ou print_top() de acordo com os
