@@ -25,7 +25,7 @@ O dicionário de imitação deve considerar que:
 * a chave B contém uma lista com as palavras C e A
 * a chave C contém uma lista com a palavra B
 
-Além disso precisamos considerar que:
+Além disso precisamos considerar que:python
 * a chave '' contém uma lista com a primeira palavra do arquivo
 * a última palavra do arquivo contém uma lista com a palavra ''.
 
@@ -42,18 +42,40 @@ método que escolhe um elemento aleatório de uma lista não vazia.
 import random
 import sys
 
+from collections import defaultdict
+
 
 def mimic_dict(filename):
-  """Retorna o dicionario imitador mapeando cada palavra para a lista de
-  palavras subsequentes."""
-    # +++ SUA SOLUÇÃO +++
-  return
+    """Retorna o dicionario imitador mapeando cada palavra para a lista de
+    palavras subsequentes."""
+    text = file_content_list(filename)
+    words = ['']
+    words.extend(text)
+    words.extend([''])
+    mm_dict = defaultdict(list)
+    for item, value in zip(words, words[1:]):
+        mm_dict[item].append(value)
+
+    return mm_dict
 
 
 def print_mimic(mimic_dict, word):
-  """Dado o dicionario imitador e a palavra inicial, imprime texto de 200 palavras."""
-    # +++ SUA SOLUÇÃO +++
-  return
+    """Dado o dicionario imitador e a palavra inicial, imprime texto de 200 palavras."""
+    new_text = word
+    new_word = ''
+
+    for cont in range(200):
+        new_word = random.choice(mimic_dict[new_word])
+        new_text = new_text + " " + new_word
+
+    return new_text
+
+
+def file_content_list(filename):
+    with open(filename) as file:
+        response = (file.read().lower().split())
+
+    return response
 
 
 # Chama mimic_dict() e print_mimic()
@@ -65,6 +87,9 @@ def main():
   dict = mimic_dict(sys.argv[1])
   print_mimic(dict, '')
 
+  print(dict)
+  print(print_mimic(dict, ''))
 
 if __name__ == '__main__':
   main()
+
